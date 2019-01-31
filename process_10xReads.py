@@ -17,6 +17,11 @@ import glob
 import errno
 from subprocess import Popen, PIPE, STDOUT
 import string
+try:
+    maketrans = ''.maketrans
+except AttributeError:
+    # fallback for Python 2
+    from string import maketrans
 from collections import Counter
 import numpy
 
@@ -49,7 +54,7 @@ def make_sure_path_exists(path):
     return path
 
 
-rcs = string.maketrans('TAGCtagc', 'ATCGATCG')
+rcs = maketrans('TAGCtagc', 'ATCGATCG')
 
 
 def revcomp(seq):
